@@ -1,0 +1,15 @@
+Changes
+MANIFEST
+MANIFEST.SKIP
+Makefile.PL
+README
+TODO
+lib/HTTP/WebTest/Plugin/XMLReport.pm
+t/01_basic.t
+t/in.html
+t/lib/HTTP/WebTest/Plugin/Cookies.pm
+t/lib/HTTP/WebTest/Plugin/FileRequest.pm
+t/test.out/out-dtd.xml
+t/test.out/out-missing-opts.xml
+t/test.out/out-no-name.xml
+t/test.out/out.xml
