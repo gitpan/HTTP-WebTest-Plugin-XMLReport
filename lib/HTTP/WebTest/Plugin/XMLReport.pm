@@ -3,8 +3,9 @@ package HTTP::WebTest::Plugin::XMLReport;
 use strict;
 use base qw(HTTP::WebTest::ReportPlugin);
 use XML::Writer;
+use POSIX qw(strftime);
 use vars qw($VERSION);
-$VERSION = '1.00';
+$VERSION = '1.01';
 
 =head1 NAME
 
@@ -12,7 +13,7 @@ HTTP::WebTest::Plugin::XMLReport - Report plugin for HTTP::WebTest, generates ou
 
 =head2 VERSION
 
- version 1.00 - $Revision: 1.3 $
+ version 1.00 - $Revision: 1.4 $
 
 Compatible with L<HTTP::WebTest|HTTP::WebTest> version 2.x API
 
@@ -179,8 +180,9 @@ sub start_tests {
     my $self = shift;
 
     $self->_init_xml_writer;
-
-    $self->{x_out}->startTag('testresults', 'date' => scalar localtime());
+    # use RFC822-conformant date string including Time Zone
+    $self->{x_out}->startTag('testresults',
+             'date' => strftime("%a, %d %b %Y %H:%M:%S %z", localtime()));
     $self->{x_out}->characters("\n");
     $self->SUPER::start_tests;
 }

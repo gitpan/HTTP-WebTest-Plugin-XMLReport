@@ -1,13 +1,12 @@
 #!/usr/bin/perl -w
 use lib qw(./blib/lib ./t/lib);
-use HTTP::WebTest::SelfTest;
-use Test::More tests => 6;
+use Test;
+BEGIN { plan tests => 4; }
 
-# 1 - test whether HTTP::WebTest::Plugin::XMLReport can be loaded
-require_ok 'HTTP::WebTest::Plugin::XMLReport';
+use HTTP::WebTest 2.0;                 # from HTTP::WebTest v 2.xx
+use HTTP::WebTest::SelfTest;           # from HTTP::WebTest v 2.xx
+use HTTP::WebTest::Plugin::XMLReport;  # from blib/lib
 
-# 2 - test whether HTTP::WebTest is installed
-require_ok 'HTTP::WebTest'; # Hmm, redundant after using ::SelfTest
 
 my $WEBTEST = HTTP::WebTest->new;
 
@@ -16,7 +15,7 @@ my $deffilter = sub {
   $_[0] =~ s/\s*url="[^"]+"/ url="A_URL"/g;
 };
 
-# 3 - do some real request
+# 1 - do some real request
 {
     my $tests = [
         {
@@ -34,7 +33,7 @@ my $deffilter = sub {
                   check_file => 't/test.out/out.xml');
 }
 
-# 4 - test with DTD - validate separately if you're paranoid enough
+# 2 - test with DTD - validate separately if you're paranoid enough
 {
     my $tests = [
         {
@@ -53,7 +52,7 @@ my $deffilter = sub {
                   check_file => 't/test.out/out-dtd.xml');
 }
 
-# 5 - missing wtscript param test_name
+# 3 - missing wtscript param test_name
 {
     my $tests = [
         {
@@ -71,7 +70,7 @@ my $deffilter = sub {
                   check_file => 't/test.out/out-no-name.xml');
 }
 
-# 6 - cooperation with unavailable params (normally used with default report)
+# 4 - cooperation with uninmplemented params (normally used with default report)
 {
     my $tests = [
         {
@@ -90,5 +89,3 @@ my $deffilter = sub {
                   opts       => $opts,
                   check_file => 't/test.out/out-missing-opts.xml');
 }
-
-

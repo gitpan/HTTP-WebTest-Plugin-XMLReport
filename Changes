@@ -1,5 +1,11 @@
 Revision history for Perl extension XMLReport.
 
+1.01 Wed Jan  8 22:27:20 CET 2003
+	- use Test instead of Test::More
+		- fixes spurious fails with SelfTest
+	- date string conforms RFC822 (with Time Zone offset) 
+	- added example scripts and XSL stylesheets
+
 1.00 Thu Jan  2 17:44:33 CET 2003
 	- removed XML::Parser from tests
 	- switched to HTTP::WebTest::SelfTest
@@ -17,4 +23,3 @@ Revision history for Perl extension XMLReport.
 0.01  Wed Jun 19 19:12:28 2002
 	- original version; created by h2xs 1.19
 
-$ Log: $
